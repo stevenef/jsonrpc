@@ -17,22 +17,38 @@ class IndexController extends Zend_Controller_Action
         $baseUrl = $objFront->getBaseUrl();  
           
         $server = new Zend_Json_Server();  
-        $server->setClass('Vqc_JsonRpc_Protokoll');  
+        $server->setClass('Application_Model_JsonRpc');  
           
         if ('GET' == $_SERVER['REQUEST_METHOD']) {  
-            $server->setTarget("http://127.0.0.1".$baseUrl."/api");  
+            // Zeigt den Endpunkt der URL, und die verwendete JSON-RPC Version:
+            $server->setTarget("http://127.0.0.1".$baseUrl);  
             $server->setEnvelope(Zend_Json_Server_Smd::ENV_JSONRPC_2);  
-              
-            $smd = $server->getServiceMap();  
+            // Den SMD holen
+            $smd = $server->getServiceMap();
+            // Den SMD an den Client zurückgeben
             header('Content-Type: application/json');  
-              
-            echo Zend_Json::prettyPrint($smd);  
+            //echo Zend_Json::prettyPrint($smd);  
+            echo $smd;
             return ;  
         }  
           
-        $server->handle();
+        try {
+            $server->handle();
+        } catch(Exception $e) {
+            $err = new Zend_Json_Server_Error($e->getMessage());
+            echo $err;
+        }
     }
 
+    public function clientAction() {
+        //
+    }
+            
+    public function phpclientAction()
+    {
+        $api = new Scitotec_JsonRpcClient('http://dev.local/jsonrpc/public/index');
+        print $api->getIpAddress();
+    }
 
 }
 

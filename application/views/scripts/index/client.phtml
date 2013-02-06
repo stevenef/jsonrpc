@@ -1,0 +1,15 @@
+<SCRIPT LANGUAGE="javascript" SRC="<?= $this->baseUrl(); ?>/js/jquery-1.3.min.js"></SCRIPT>
+<SCRIPT LANGUAGE="javascript" SRC="<?= $this->baseUrl(); ?>/js/json2.js"></SCRIPT>
+<SCRIPT LANGUAGE="javascript" SRC="<?= $this->baseUrl(); ?>/js/jquery.zend.jsonrpc.js"></SCRIPT>
+
+<script type="text/javascript">
+// JS Client
+$(document).ready(function(){
+	 myApi = jQuery.Zend.jsonrpc({url: '<?= $this->baseUrl(); ?>/index'});
+	 
+	 alert('5+5=' + myApi.add(5,5));
+	 
+	 });
+</script>
+
+TEST
