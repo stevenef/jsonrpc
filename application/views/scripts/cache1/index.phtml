@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html manifest="<?= $this->baseUrl(); ?>/cache1/manifest">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="Content-Type" content="text/html" />
+       
+        <title>Cache-Manifest-Datei</title>
+        <!--<script type="text/javascript" src="<?= $this->baseUrl(); ?>/js/jquery-1.8.2.min.js"></script>  -->
+        <script type="text/javascript">
+            function logEvent(event) {
+                console.log(event.type);
+            }
+            // Safari is reading the manifest file for the first time or checking to see if it has changed. This event should always fire once
+            window.applicationCache.addEventListener('checking',logEvent,false); 
+            // The manifest file has not changed.
+            window.applicationCache.addEventListener('noupdate',logEvent,false);
+            // Safari is downloading a changed resource.
+            window.applicationCache.addEventListener('downloading',logEvent,false);
+            // Safari has downloaded all listed resources into the cache.
+            window.applicationCache.addEventListener('cached',logEvent,false);
+            // A new copy of the cache is ready to be swapped in.
+            window.applicationCache.addEventListener('updateready',logEvent,false);
+            // The manifest file is code 404 or code 410; the application cache for the site has been deleted.
+            window.applicationCache.addEventListener('obsolete',logEvent,false);
+            // An error occurred when loading the manifest, its parent page, or a listed resource, or the manifest file changed while the update was running. The cache update has been aborted.
+            window.applicationCache.addEventListener('error',logEvent,false);
+
+  </script>
+    </head>
+    <body>
+        <div>
+            Das ist ein Test V5
+        </div>
+    </body>
+</html>
